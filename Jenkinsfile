@@ -24,8 +24,13 @@ pipeline {
                 echo 'Clonning Repository'
 
                 git url: 'https://github.com/seungunleeee/jenkinsdockerPLZ.git',
-                    branch: 'master',
+                    branch: 'main',
                     credentialsId: 'gittest'
+                sh '''
+                pwd
+                ls -al
+                
+                ''' 
             }
 
             post {
@@ -53,7 +58,10 @@ pipeline {
             echo 'Deploying Frontend'
             // 프론트엔드 디렉토리의 정적파일들을 S3 에 올림, 이 전에 반드시 EC2 instance profile 을 등록해야함.
             dir ('./website'){
+                
                 sh '''
+                pwd
+                ls -al
                 aws s3 sync ./ s3://seungunleedockerjenkinstest
                 '''
             }
