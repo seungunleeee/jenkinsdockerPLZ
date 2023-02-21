@@ -1,5 +1,4 @@
-FROM node
-
+FROM node:latest
 # set working directory
 WORKDIR /
 
@@ -12,7 +11,7 @@ copy package*.json ./
 CMD ["echo", 'we re in build docker file']
 RUN npm install
 # RUN npm install -g typescript
-COPY . .
+COPY . ./
 RUN npm run build
 
 EXPOSE 80
