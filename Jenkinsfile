@@ -119,11 +119,7 @@ pipeline {
         //-arg env=${PROD} 예는 나중에 어떻게 사용할지 해보자
         stage('Bulid Backend') {
           echo 'we are in!'
-          agent {
-             docker {
-              image 'node:latest'
-            }
-          }
+          agent any
           echo 'we are out!'
           steps {
             echo 'Build Backend'
