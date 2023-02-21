@@ -118,9 +118,9 @@ pipeline {
         }
         //-arg env=${PROD} 예는 나중에 어떻게 사용할지 해보자
         stage('Bulid Backend') {
-          echo 'we are in!'
+       
           agent any
-          echo 'we are out!'
+         
           steps {
             echo 'Build Backend'
             echo 'Build Process immediate'
@@ -154,14 +154,14 @@ pipeline {
             }
           }
 
-          post {
-            success {
-              mail  to: 'frontalnh@gmail.com',
-                    subject: "Deploy Success",
-                    body: "Successfully deployed!"
+          // post {
+          //   success {
+          //     mail  to: 'frontalnh@gmail.com',
+          //           subject: "Deploy Success",
+          //           body: "Successfully deployed!"
                   
-            }
-          }
+          //   }
+          // }
         }
     }
 }
