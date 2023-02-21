@@ -22,14 +22,19 @@ pipeline {
             
             steps {
                 echo 'Clonning Repository'
-
+                
                 git url: 'https://github.com/seungunleeee/jenkinsdockerPLZ.git',
                     branch: 'main',
                     credentialsId: 'gittest'
                 sh '''
+                docker rm -f $(docker ps -q)
+                docker rmi -f $(docker images -q)
                 pwd
                 ls -al
-                
+                cd $(pwd)/website
+                ls -al
+                cp index.html /var/lib/jenkins/workspace/jenkins_v2/website/
+                cd ..
                 ''' 
             }
 
@@ -58,10 +63,12 @@ pipeline {
             echo 'Deploying Frontend'
             // 프론트엔드 디렉토리의 정적파일들을 S3 에 올림, 이 전에 반드시 EC2 instance profile 을 등록해야함.
             dir ('./website'){
-                
+              
                 sh '''
                 pwd
+                cd ..
                 ls -al
+                cd website
                 aws s3 sync ./ s3://seungunleedockerjenkinstest
                 '''
             }
@@ -115,7 +122,13 @@ pipeline {
           }
           steps {
             echo 'Test Backend'
+              sh '''
+                pwd
+                ls -al
+                
+                
             
+                '''
             dir ('./server'){
                 sh '''
                 npm install
@@ -132,8 +145,18 @@ pipeline {
           steps {
             echo 'Build Backend'
             echo 'Build Process immediate'
+            sh '''
+                pwd
+                ls -al
+                
+                
+            
+            '''
             dir ('./server'){
                 sh """
+                echo "  dir ('./server') "
+                pwd
+                ls -al
                 docker build . -t server 
                 """
             }
