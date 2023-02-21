@@ -118,7 +118,11 @@ pipeline {
         }
         //-arg env=${PROD} 예는 나중에 어떻게 사용할지 해보자
         stage('Bulid Backend') {
-          agent any
+          agent {
+             docker {
+              image 'node:latest'
+            }
+          }
           steps {
             echo 'Build Backend'
             echo 'Build Process immediate'
