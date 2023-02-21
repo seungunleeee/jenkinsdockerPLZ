@@ -13,7 +13,7 @@ RUN npm install
 # RUN npm install -g typescript
 COPY . ./
 RUN npm run build
-
+# 80 일단 지움
 # EXPOSE 80
 
 CMD [ "node","./dist/index.js" ]
