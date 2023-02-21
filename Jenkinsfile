@@ -23,7 +23,7 @@ pipeline {
             steps {
                 echo 'Clonning Repository'
 
-                git url: 'https://github.com/seungunleeee/DockerJenkinsPractice.git',
+                git url: 'https://github.com/seungunleeee/jenkinsdockerPLZ.git',
                     branch: 'master',
                     credentialsId: 'gittest'
             }
